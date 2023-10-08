@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* .mat-dialog-container {
+    overflow-x: hidden !important;    
+    width: 30% !important;
+    height: auto !important;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    border: 1px solid #ccc;
+    background-color: white;
+    transform: translate(-50%, -50%);
+} */
+
+.mat-snack-bar-container {
+    top: 0;
+    position: absolute;
+    left: 37%;
+}
+
+.mat-error{
+    color: red;
+}
+
+.cdk-live-announcer-element {
+    display: none !important;
+}
+
+.cdk-visually-hidden{
+    display: none !important;
+}

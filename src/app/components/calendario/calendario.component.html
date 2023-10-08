@@ -1,0 +1,83 @@
+
+  <div class="container-fluid">
+
+    <div class="row">                    
+      <!-- Area Chart -->
+      <div class="col-xl-12 col-lg-12">
+          <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div
+                  class="card-header py-3 d-flex flex-row align-items-center justify-content-between"> 
+                  <h1 class="m-0 font-weight-bold text-primary">Calendar</h1>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                  <div class="row chart-area alinhaDiv">
+                    <div class="col-xl-2 col-lg-2">
+                      <mat-calendar
+                        [(selected)]="selectedDate"
+                        (selectedChange)="onDateSelect($event)"
+                        [dateClass]="getDateClass"
+                        [minDate]="minSelectableDate">
+                      </mat-calendar>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 d-flex justify-content-center" *ngIf="compromissos.length == 0">
+                      <h2 class="m-0 font-weight-bold text-primary">Choose a recent date</h2>
+                    </div>
+                    
+                    <div class="table-responsive-sm col-xl-10 col-lg-10" *ngIf="compromissos.length > 0">                                        
+                      <table class="table table-striped">
+                          <thead class="thead-light">
+                            <tr>
+                              <th scope="col">Title</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Hour</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">
+                                  <a class="d-none d-sm-inline-block">
+                                      <i class="fa fa-arrow-up fa-sm mr-2"></i>
+                                  </a>
+                                  <a class="d-none d-sm-inline-block">
+                                      <i class="fa fa-arrow-down fa-sm"></i>
+                                  </a>
+                              </th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody cdkDropList (cdkDropListDropped)="reOrdemList($event)">
+                            <tr *ngFor="let item of compromissos; let i = index" cdkDrag>
+                              <th scope="row">{{ item.title }}</th>
+                              <td>{{ item.data | date:'dd/MM/yyyy' }}</td>
+                              <td>{{ item.start }} - {{ item.end }}</td>
+                              <td>{{ item.description }}</td>
+                              <td>
+                                  <ng-container *ngIf="i !== 0">
+                                      <a class="d-none d-sm-inline-block" (click)="upCompromisso(i)">
+                                          <i class="fa fa-arrow-up fa-sm mr-2"></i>
+                                      </a>
+                                  </ng-container>
+
+                                  <ng-container *ngIf="i !== compromissos.length - 1">
+                                      <a class="d-none d-sm-inline-block" (click)="downCompromisso(i)">
+                                          <i class="fa fa-arrow-down fa-sm"></i>
+                                      </a>
+                                  </ng-container>
+                              </td>
+                              <td class="d-flex">
+                                  <a class="d-none d-sm-inline-block mr-2" (click)="editCompromisso(i, item)">
+                                      <i class="fa fa-edit fa-sm"></i>
+                                  </a>
+                                  <a class="d-none d-sm-inline-block" (click)="deleteCompromisso(i, item)">
+                                      <i class="fa fa-trash fa-sm"></i>
+                                  </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
